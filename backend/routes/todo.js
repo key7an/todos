@@ -10,7 +10,7 @@ router.get('http://localhost:5000/todo', async (req, res, next) => {
   res.json({ todos });
 });
 
-router.post('http://localhost:3000/todo', async (req, res, next) => {
+router.post('http://localhost:5000/todo', async (req, res, next) => {
   db.getDb().todos.insertOne({ text: req.body.text });
 
   res.json({ message: 'Todo stored!' });
