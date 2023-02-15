@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  max-height: 100%vh;
+  max-width: 100%vw;
+  color: rgb(110, 112, 114);
+}
