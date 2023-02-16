@@ -12,17 +12,14 @@ const TodoContextProvider = ({ children }) => {
 
   useEffect(() => {
     getTodo();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getTodo = async () => {
-    const response = await fetch('http://localhost:5000/todos');
+     const response = await fetch('http://localhost:5000/');
     const todoData = await response.json();
 
-    console.log(todoData);
-
-    setTodo(todoData);
+    setTodo(todoData.todos);
 
     setIsLoading(false);
   };
@@ -59,7 +56,7 @@ const TodoContextProvider = ({ children }) => {
   ////////////////////Create/////////////////////
 
   const addHandler = async (newTodo) => {
-    const response = await fetch('/todo', {
+    const response = await fetch('http://localhost:5000/todos', {
       method: 'POST',
       body: JSON.stringify(newTodo),
       headers: {
@@ -68,7 +65,6 @@ const TodoContextProvider = ({ children }) => {
     });
 
     const todoData = await response.json();
-    // const todoId = await response.todoId
 
     setTodo([todoData, ...todo]);
     setIsLoading(false);
@@ -76,11 +72,13 @@ const TodoContextProvider = ({ children }) => {
 
   ////////////////////Delete/////////////////////
 
-  const deleteHandler = async (id) => {
+ const deleteHandler = async (id) => {
     alert('Are you sure you want to delete this todo?');
-    await fetch(`/todo/${id}`, {
-      method: 'delete',
+
+    await fetch(`http://localhost:5000/todos/${id}`, {
+      method: 'DELETE',
     });
+
     setTodo(todo.filter((i) => i.id !== id));
     setIsLoading(false);
   };
