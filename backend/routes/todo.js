@@ -3,10 +3,9 @@ const db = require('../data/database');
 
 const router = express.Router();
 
-router.get('http://localhost:5000/todo', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   const todos = await db.getDb().collection('todos').find().toArray();
-
-  console.log(todos);
+  
   res.json({ todos });
 });
 
