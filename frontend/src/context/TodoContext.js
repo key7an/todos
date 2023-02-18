@@ -102,8 +102,8 @@ const TodoContextProvider = ({ children }) => {
   };
 
   const editHandler = (item) => {
-    const toBeEditedTodo = todo.find((i) => i.id === item.id);
-    setText(toBeEditedTodo.text);
+//     const toBeEditedTodo = todo.find((i) => i.id === item.id);
+    setText(item.text);
 
     setTodoEdit({ item, edit: true });
   };
