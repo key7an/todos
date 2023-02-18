@@ -12,11 +12,12 @@ const TodoContextProvider = ({ children }) => {
 
   useEffect(() => {
     getTodo();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getTodo = async () => {
-     const response = await fetch('http://localhost:5000/');
+    const response = await fetch('http://localhost:5000/');
     const todoData = await response.json();
 
     setTodo(todoData.todos);
@@ -72,7 +73,7 @@ const TodoContextProvider = ({ children }) => {
 
   ////////////////////Delete/////////////////////
 
- const deleteHandler = async (id) => {
+  const deleteHandler = async (id) => {
     alert('Are you sure you want to delete this todo?');
 
     await fetch(`http://localhost:5000/todos/${id}`, {
@@ -86,8 +87,8 @@ const TodoContextProvider = ({ children }) => {
   ////////////////////Edit/////////////////////
 
   const updateHandler = async (id, updTodo) => {
-    const response = await fetch(`/todo/${id}`, {
-      method: 'put',
+    const response = await fetch(`http://localhost:5000/todos/${id}`, {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -96,7 +97,8 @@ const TodoContextProvider = ({ children }) => {
 
     const todoData = await response.json();
 
-    setTodo(todo.map((i) => (i.id === id ? { ...i, ...todoData } : i)));
+    setTodo(todoData.updatedTodos);
+    setIsLoading(false);
   };
 
   const editHandler = (item) => {
