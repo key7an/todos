@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 
 import { TodoContext } from '../context/TodoContext';
 import TodoItem from './TodoItem';
+import Loading from './UI/Loading';
 
 const TodoList = () => {
   const { todo, isLoading } = useContext(TodoContext);
@@ -16,9 +17,7 @@ const TodoList = () => {
   }
 
   return isLoading ? (
-    <h2 className="text-red-500 font-bold">
-      L O . A . . D . . . I . . . . N . . . . . G !
-    </h2>
+    <Loading />
   ) : (
     <div>
       {todo.map((item) => (
