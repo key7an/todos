@@ -18,7 +18,7 @@ router.post('/todos', async (req, res, next) => {
 
   db.getDb().collection('todos').insertOne({ text, id });
 
-  res.json({ text, id });
+   res.status(201).json({ text, id });
 });
 
 ////////Delete:
@@ -31,9 +31,15 @@ router.delete('/todos/:tid', async (req, res, next) => {
   res.json({ deleteTodo });
 });
 
+router.delete('/todos/', async (req, res, next) => {
+ const deleteTodo = await db.getDb().collection('todos').deleteMany({});
+
+  res.json({ deleteTodo });
+});
+
 ////////Update:
 
-router.patch('/todos/:tid', async (req, res, next) => {
+router.put('/todos/:tid', async (req, res, next) => {
   const todoId = req.params.tid;
   const { text } = req.body;
 
@@ -42,9 +48,12 @@ router.patch('/todos/:tid', async (req, res, next) => {
     .collection('todos')
     .updateOne({ id: todoId }, { $set: { text: text } });
 
-  const updatedTodos = await db.getDb().collection('todos').find().toArray();
+   const updatedTodo = await db
+    .getDb()
+    .collection('todos')
+    .findOne({ id: todoId });
 
-  res.json({ updatedTodos });
+  res.status(200).json({ updatedTodo });
 });
 
 module.exports = router;
