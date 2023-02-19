@@ -8,7 +8,7 @@ const TodoItem = ({ item }) => {
   const { deleteHandler, editHandler } = useContext(TodoContext);
 
   return (
-    <div>
+    <div className="p-1">
       <div className="flex justify-between items-center">
         <div className=" list-none ">{item.text}</div>
         <div className="flex gap-1 ml-1">
