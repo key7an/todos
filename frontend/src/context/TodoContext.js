@@ -48,7 +48,7 @@ const TodoContextProvider = ({ children }) => {
 
     if (todoEdit.edit === true) {
       updateHandler(todoEdit.item.id, newTodo);
-    } else {
+    } else if (todoEdit.edit === false) {
       addHandler(newTodo);
     }
     setText('');
@@ -76,11 +76,18 @@ const TodoContextProvider = ({ children }) => {
   const deleteHandler = async (id) => {
     alert('Are you sure you want to delete this todo?');
 
-    await fetch(`http://localhost:5000/todos/${id}`, {
-      method: 'DELETE',
-    });
+    if (id) {
+      await fetch(`http://localhost:5000/todos/${id}`, {
+        method: 'DELETE',
+      });
+      setTodo(todo.filter((i) => i.id !== id));
+    } else {
+      await fetch(`http://localhost:5000/todos/`, {
+        method: 'DELETE',
+      });
+      setTodo([]);
+    }
 
-    setTodo(todo.filter((i) => i.id !== id));
     setIsLoading(false);
   };
 
@@ -88,7 +95,7 @@ const TodoContextProvider = ({ children }) => {
 
   const updateHandler = async (id, updTodo) => {
     const response = await fetch(`http://localhost:5000/todos/${id}`, {
-      method: 'PATCH',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -97,12 +104,17 @@ const TodoContextProvider = ({ children }) => {
 
     const todoData = await response.json();
 
-    setTodo(todoData.updatedTodos);
+    setTodo(
+      todo.map((item) =>
+        item.id === id ? { ...item, ...todoData.updatedTodo } : item
+      )
+    );
+
+    setTodoEdit({ edit: false });
     setIsLoading(false);
   };
 
   const editHandler = (item) => {
-//     const toBeEditedTodo = todo.find((i) => i.id === item.id);
     setText(item.text);
 
     setTodoEdit({ item, edit: true });
