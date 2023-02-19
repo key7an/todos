@@ -3,12 +3,9 @@ import { Box } from '@mui/system';
 
 const Loading = () => {
   return (
-    <div>
-      <Box
-        className="bg-red-200 mt-20 w-[200px] h-[100px] p-2 rounded-lg border-solid border-2
-  border-gray-400 m-5 shadow-sm shadow-slate-600"
-      >
-        <h2 className="text-red-500 font-bold">
+    <div className="mr-1">
+      <Box className="bg-red-100 mt-10 w-[260px] h-[45px] rounded-lg border-solid border-2">
+        <h2 className="text-red-500 font-bold py-2 pl-2 align-middle">
           L O . A . . D . . . I . . . . N . . . . . G !
         </h2>
       </Box>
