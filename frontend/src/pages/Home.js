@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
+import Box from '@mui/material/Box';
 
 import TodoForm from '../components/TodoForm';
 import TodoList from '../components/TodoList';
-import Box from '@mui/material/Box';
 import { TodoContext } from '../context/TodoContext';
 
 const Home = () => {
