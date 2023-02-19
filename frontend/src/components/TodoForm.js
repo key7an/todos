@@ -16,7 +16,7 @@ const TodoForm = () => {
   return (
     <div className="flex flex-col ">
       <form className="flex flex-col mt-5 gap-4 text-center">
-        <h3 className="font-semibold text-xs text-red-500">Never Give Up</h3>
+        <h3 className="font-semibold text-xs text-red-500">(Never Give Up)</h3>
         <Input
           type="text"
           value={text}
